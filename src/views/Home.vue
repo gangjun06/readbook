@@ -1,18 +1,26 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="mx-4 my-4">
+    <div class="flex justify-center" v-for="item in data" :key="item.id">
+      <Card :data="item" />
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import db from '../db'
+import Card from '../components/card'
 export default {
   name: 'Home',
+  data: () => ({
+    data: []
+  }),
   components: {
-    HelloWorld
+    Card
+  },
+  mounted() {
+    db.getAll().then(result => {
+      this.data = result
+    })
   }
 }
 </script>
