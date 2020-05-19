@@ -1,8 +1,8 @@
 <template>
-  <div class="max-w-sm lg:max-w-full lg:flex">
+  <div class="max-w-sm lg:max-w-full lg:flex mt-4">
     <div
       class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-      style="background-image: url('https://i.picsum.photos/id/975/200/300.jpg')"
+      :style="{ backgroundImage: 'url(' + data.image + ')' }"
       title="bookcover"
     ></div>
     <div
@@ -19,9 +19,7 @@
       <div class="flex text-left">
         <div class="text-sm">
           <p class="text-gray-900 leading-none">작가: {{ data.author }}</p>
-          <p class="text-gray-600">
-            읽은기간: {{ data.timebegin }} ~ {{ data.timeend }}
-          </p>
+          <p class="text-gray-600">읽은기간: {{ timebegin }} ~ {{ timeend }}</p>
         </div>
       </div>
     </div>
@@ -29,7 +27,16 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
-  props: ['data']
+  props: ['data'],
+  computed: {
+    timebegin() {
+      return moment(this.data.timebegin * 1000).format('Y년 M월 D일')
+    },
+    timeend() {
+      return moment(this.data.timeend * 1000).format('Y년 M월 D일')
+    }
+  }
 }
 </script>
