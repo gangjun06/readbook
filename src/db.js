@@ -22,6 +22,6 @@ export default {
       secret: form.password,
       query: query
     })
-    console.log(data)
+    return data
   }
 }
